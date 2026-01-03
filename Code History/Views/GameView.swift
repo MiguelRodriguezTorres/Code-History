@@ -32,6 +32,20 @@ struct GameView: View {
         .foregroundStyle(.white) // foregroundColor will be deprecated - use foregroundStyle
         .navigationBarHidden(true) // Hide the navigation bar (e.g. back button)
         .environmentObject(viewModel) // new line
+        .background(
+            NavigationLink(
+                destination: ScoreView(
+                    viewModel: ScoreViewModel(
+                        correctGuesses: viewModel.correctGuesses,
+                        incorrectGuesses: viewModel.incorrectGuesses
+                    )
+                ),
+                isActive: .constant(viewModel.gameIsOver),
+                label: {
+                    EmptyView()
+                }
+            )
+        )
     }
 }
 
