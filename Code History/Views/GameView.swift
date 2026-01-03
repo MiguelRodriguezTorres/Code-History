@@ -19,33 +19,43 @@ struct GameView: View {
     
     // body property of ContentView struct
     var body: some View {
-        ZStack {
-            GameColor.main.ignoresSafeArea()
-            VStack {
-                Text(viewModel.questionProgressText)
-                    .font(.callout)
-                    .multilineTextAlignment(.leading)
-                    .padding()
-                QuestionView(question: viewModel.currentQuestion)
+        NavigationStack {
+            ZStack {
+                GameColor.main.ignoresSafeArea()
+                VStack {
+                    Text(viewModel.questionProgressText)
+                        .font(.callout)
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                    QuestionView(question: viewModel.currentQuestion)
+                }
             }
-        }
-        .foregroundStyle(.white) // foregroundColor will be deprecated - use foregroundStyle
-        .navigationBarHidden(true) // Hide the navigation bar (e.g. back button)
-        .environmentObject(viewModel) // new line
-        .background(
-            NavigationLink(
-                destination: ScoreView(
+            .foregroundStyle(.white) // foregroundColor will be deprecated - use foregroundStyle
+            .navigationBarHidden(true) // Hide the navigation bar (e.g. back button)
+            .environmentObject(viewModel) // new line
+            /* .navigationDestination(isPresented: $viewModel.gameIsOver) {
+                ScoreView(
                     viewModel: ScoreViewModel(
                         correctGuesses: viewModel.correctGuesses,
                         incorrectGuesses: viewModel.incorrectGuesses
                     )
-                ),
-                isActive: .constant(viewModel.gameIsOver),
-                label: {
-                    EmptyView()
-                }
+                )
+            } */
+            .background(
+                NavigationLink(
+                    destination: ScoreView(
+                        viewModel: ScoreViewModel(
+                            correctGuesses: viewModel.correctGuesses,
+                            incorrectGuesses: viewModel.incorrectGuesses
+                        )
+                    ),
+                    isActive: .constant(viewModel.gameIsOver),
+                    label: {
+                        EmptyView()
+                    }
+                )
             )
-        )
+        }
     }
 }
 

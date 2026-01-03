@@ -40,6 +40,9 @@ class GameViewModel: ObservableObject {
         game.isOver
     }
     
+    // for .navigationDestination in GameView
+    //@Published var gameIsOver: Bool = game.isOver
+    
     var correctGuesses: Int {
         game.guessCount.correct
     }
