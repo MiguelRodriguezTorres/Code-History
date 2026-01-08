@@ -1,4 +1,4 @@
-#Code History
+Code History
 -------------
 
 This application is part of the Codecademy iOS Developer Career course.
